@@ -1,14 +1,17 @@
 <h1 align="left">Hey 👋 What's up?</h1>
 
-<p align="left">My name is <strong>Tejas Raval</strong> and I'm a <strong>Frontend Developer</strong> </p>
+<p align="left">My name is <strong>Tejas Raval</strong> and I'm a <strong>Frontend Developer</strong> from India.</p>
 
 <h2 align="left">About me</h2>
 
 <p align="left">
-✨ Creating clean, responsive, and user-friendly web experiences.<br>
-📚 I'm currently learning <strong>advanced JavaScript & React</strong>.<br>
-🎯 Goals: Build polished front-end projects, contribute to open-source, and grow as a UI-focused developer.<br>
-🎲 Fun fact: I love turning designs into real, working web pages.
+✨ I’m a passionate web developer focused on creating <strong>clean, responsive, and user-friendly</strong> websites and web applications.<br>
+💻 I specialize in <strong>Frontend Development</strong> and enjoy turning creative ideas and designs into fully functional products.<br>
+📚 Currently, I’m learning and improving my skills in <strong>JavaScript, React, and modern frontend frameworks</strong>.<br>
+⚡ I have hands-on experience with <strong>HTML, CSS, JavaScript, React, Angular, Bootstrap, and Tailwind CSS</strong>.<br>
+🛠️ I also use tools like <strong>Git, GitHub, and Figma (basic)</strong> to streamline my workflow.<br>
+🎯 My goal is to become a <strong>full-stack developer</strong> and contribute to real-world projects and open-source communities.<br>
+🎲 Fun fact: I believe that great design isn’t just how it looks — it’s how it works for the user.
 </p>
 
 <h2 align="left">I code with</h2>
