@@ -1,6 +1,6 @@
 <h1 align="left">Hey 👋 What's up?</h1>
 
-<p align="left">My name is <strong>Tejas Raval</strong> and I'm a <strong>Frontend Developer</strong> from India.</p>
+<p align="left">My name is <strong>Tejas Raval</strong> and I'm a <strong>Frontend Developer</strong>.</p>
 
 <h2 align="left">About me</h2>
 
