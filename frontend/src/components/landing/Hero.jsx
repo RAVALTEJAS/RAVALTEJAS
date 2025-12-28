@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "../ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "../ui/carousel";
 
 const heroImages = [
@@ -24,20 +22,27 @@ const Hero = () => {
     if (!api) return;
 
     const intervalId = setInterval(() => {
-      // Check if user is interacting or something, but basic interval is fine
       if (api.canScrollNext()) {
-          api.scrollNext();
+        api.scrollNext();
       } else {
-          api.scrollTo(0);
+        api.scrollTo(0);
       }
-    }, 5000); 
+    }, 5000);
 
     return () => clearInterval(intervalId);
   }, [api]);
 
+  const scrollPrev = useCallback(() => {
+    if (api) api.scrollPrev();
+  }, [api]);
+
+  const scrollNext = useCallback(() => {
+    if (api) api.scrollNext();
+  }, [api]);
+
   return (
-    <section id="hero" className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black">
-      {/* Carousel Background */}
+    <section id="hero" className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-black group">
+      {/* Carousel Background - Layer 0 */}
       <div className="absolute inset-0 z-0">
         <Carousel setApi={setApi} className="w-full h-full" opts={{ loop: true }}>
           <CarouselContent className="h-full ml-0">
@@ -49,28 +54,34 @@ const Hero = () => {
                     alt={`Hero Slide ${index + 1}`}
                     className="w-full h-full object-cover transition-transform duration-[10s] hover:scale-105"
                   />
-                  {/* Overlay for readability */}
+                  {/* Overlay */}
                   <div className="absolute inset-0 bg-black/40 mix-blend-multiply" />
                   <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-90" />
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          
-          {/* 
-            FIX: Added z-20 to ensure buttons are above the text overlay container (z-10).
-            Removed 'hidden md:flex' so they are visible on mobile too if desired, 
-            or keep it but ensure z-index is high. 
-            Also added cursor-pointer and ensured pointer-events-auto.
-          */}
-          <CarouselPrevious className="absolute left-4 md:left-8 z-20 bg-white/10 border-white/20 text-white hover:bg-white/30 hover:text-white h-12 w-12 cursor-pointer" />
-          <CarouselNext className="absolute right-4 md:right-8 z-20 bg-white/10 border-white/20 text-white hover:bg-white/30 hover:text-white h-12 w-12 cursor-pointer" />
         </Carousel>
       </div>
 
-      {/* Content (z-index 10) */}
-      {/* Added pointer-events-none to the container so it doesn't block clicks on sides, 
-          but pointer-events-auto to the inner content div so buttons/text remain interactive */}
+      {/* Manual Navigation Buttons - Layer 30 (Above everything) */}
+      <button 
+        onClick={scrollPrev}
+        className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-white/30 text-white border border-white/20 transition-all duration-200 backdrop-blur-sm group-hover:opacity-100 md:opacity-0 focus:opacity-100"
+        aria-label="Previous slide"
+      >
+        <ChevronLeft className="w-8 h-8" />
+      </button>
+
+      <button 
+        onClick={scrollNext}
+        className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-30 p-3 rounded-full bg-white/10 hover:bg-white/30 text-white border border-white/20 transition-all duration-200 backdrop-blur-sm group-hover:opacity-100 md:opacity-0 focus:opacity-100"
+        aria-label="Next slide"
+      >
+        <ChevronRight className="w-8 h-8" />
+      </button>
+
+      {/* Content - Layer 10 */}
       <div className="relative z-10 container mx-auto px-6 text-center pt-20 pointer-events-none h-full flex flex-col justify-center">
         <div className="pointer-events-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 ease-out">
           <span className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm tracking-widest uppercase mb-6">
@@ -96,7 +107,7 @@ const Hero = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/70 z-20">
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-white/70 z-20 pointer-events-none">
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center pt-2">
           <div className="w-1 h-1 bg-white rounded-full" />
         </div>

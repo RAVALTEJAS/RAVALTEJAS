@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { AspectRatio } from "../ui/aspect-ratio";
 import { Dialog, DialogContent, DialogTrigger, DialogClose } from "../ui/dialog";
-import { ZoomIn, X } from "lucide-react";
+import { ZoomIn, X, ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "../ui/carousel";
 
 const galleryImages = [
@@ -22,10 +20,21 @@ const galleryImages = [
 const Gallery = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [startIndex, setStartIndex] = useState(0);
+  const [api, setApi] = useState(null);
 
   const openLightbox = (index) => {
     setStartIndex(index);
     setIsOpen(true);
+  };
+
+  const handlePrev = (e) => {
+    e.stopPropagation();
+    api?.scrollPrev();
+  };
+
+  const handleNext = (e) => {
+    e.stopPropagation();
+    api?.scrollNext();
   };
 
   return (
@@ -72,7 +81,7 @@ const Gallery = () => {
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogContent className="max-w-[95vw] h-[90vh] p-0 border-none bg-transparent shadow-none flex items-center justify-center focus:outline-none">
              {/* Close button with high contrast */}
-             <DialogClose className="absolute right-4 top-4 z-50 rounded-full bg-black/50 p-2 text-white hover:bg-black/70 transition-colors">
+             <DialogClose className="absolute right-4 top-4 z-[60] rounded-full bg-black/50 p-2 text-white hover:bg-black/70 transition-colors cursor-pointer border border-white/20">
                 <X className="h-6 w-6" />
                 <span className="sr-only">Close</span>
              </DialogClose>
@@ -81,26 +90,40 @@ const Gallery = () => {
                 Lightbox Carousel 
                 We use 'opts={{ startIndex }}' to open at the clicked image
              */}
-            <Carousel 
-              opts={{ startIndex: startIndex, loop: true }} 
-              className="w-full h-full flex items-center justify-center"
-            >
-              <CarouselContent className="h-full">
-                {galleryImages.map((src, idx) => (
-                  <CarouselItem key={idx} className="h-full flex items-center justify-center pt-4">
-                    <img
-                      src={src}
-                      alt={`Lightbox ${idx + 1}`}
-                      className="max-h-[85vh] w-auto max-w-full object-contain rounded-md shadow-2xl"
-                    />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
+            <div className="relative w-full h-full flex items-center justify-center">
+              <Carousel 
+                setApi={setApi}
+                opts={{ startIndex: startIndex, loop: true }} 
+                className="w-full h-full flex items-center justify-center"
+              >
+                <CarouselContent className="h-full">
+                  {galleryImages.map((src, idx) => (
+                    <CarouselItem key={idx} className="h-full flex items-center justify-center pt-4">
+                      <img
+                        src={src}
+                        alt={`Lightbox ${idx + 1}`}
+                        className="max-h-[85vh] w-auto max-w-full object-contain rounded-md shadow-2xl"
+                      />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
               
-              {/* Slider Navigation Buttons */}
-              <CarouselPrevious className="left-4 md:left-8 bg-white/10 border-white/20 text-white hover:bg-white/30 h-12 w-12" />
-              <CarouselNext className="right-4 md:right-8 bg-white/10 border-white/20 text-white hover:bg-white/30 h-12 w-12" />
-            </Carousel>
+              {/* Custom Navigation Buttons for Lightbox - Z-index 50 to ensure they are on top of image */}
+              <button 
+                onClick={handlePrev}
+                className="absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-black/50 hover:bg-black/70 text-white border border-white/20 transition-all duration-200 cursor-pointer"
+              >
+                <ChevronLeft className="h-8 w-8" />
+              </button>
+              
+              <button 
+                onClick={handleNext}
+                className="absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-black/50 hover:bg-black/70 text-white border border-white/20 transition-all duration-200 cursor-pointer"
+              >
+                <ChevronRight className="h-8 w-8" />
+              </button>
+            </div>
           </DialogContent>
         </Dialog>
       </div>
