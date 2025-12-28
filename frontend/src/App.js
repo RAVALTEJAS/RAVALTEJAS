@@ -7,6 +7,7 @@ import Gallery from "./components/landing/Gallery";
 import Testimonials from "./components/landing/Testimonials";
 import Contact from "./components/landing/Contact";
 import Footer from "./components/landing/Footer";
+import ScrollToTop from "./components/common/ScrollToTop";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 }

@@ -24,8 +24,13 @@ const Hero = () => {
     if (!api) return;
 
     const intervalId = setInterval(() => {
-      api.scrollNext();
-    }, 5000); // Change slide every 5 seconds
+      // Check if user is interacting or something, but basic interval is fine
+      if (api.canScrollNext()) {
+          api.scrollNext();
+      } else {
+          api.scrollTo(0);
+      }
+    }, 5000); 
 
     return () => clearInterval(intervalId);
   }, [api]);
@@ -51,15 +56,23 @@ const Hero = () => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          {/* Custom Navigation Buttons (hidden on mobile to keep it clean) */}
-          <CarouselPrevious className="hidden md:flex left-8 border-white/20 bg-white/10 text-white hover:bg-white/30" />
-          <CarouselNext className="hidden md:flex right-8 border-white/20 bg-white/10 text-white hover:bg-white/30" />
+          
+          {/* 
+            FIX: Added z-20 to ensure buttons are above the text overlay container (z-10).
+            Removed 'hidden md:flex' so they are visible on mobile too if desired, 
+            or keep it but ensure z-index is high. 
+            Also added cursor-pointer and ensured pointer-events-auto.
+          */}
+          <CarouselPrevious className="absolute left-4 md:left-8 z-20 bg-white/10 border-white/20 text-white hover:bg-white/30 hover:text-white h-12 w-12 cursor-pointer" />
+          <CarouselNext className="absolute right-4 md:right-8 z-20 bg-white/10 border-white/20 text-white hover:bg-white/30 hover:text-white h-12 w-12 cursor-pointer" />
         </Carousel>
       </div>
 
-      {/* Content (z-index higher than carousel) */}
-      <div className="relative z-10 container mx-auto px-6 text-center pt-20">
-        <div className="animate-in fade-in slide-in-from-bottom-8 duration-1000 ease-out">
+      {/* Content (z-index 10) */}
+      {/* Added pointer-events-none to the container so it doesn't block clicks on sides, 
+          but pointer-events-auto to the inner content div so buttons/text remain interactive */}
+      <div className="relative z-10 container mx-auto px-6 text-center pt-20 pointer-events-none h-full flex flex-col justify-center">
+        <div className="pointer-events-auto animate-in fade-in slide-in-from-bottom-8 duration-1000 ease-out">
           <span className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm tracking-widest uppercase mb-6">
             Premium Event Planning
           </span>
