@@ -188,6 +188,9 @@ frontend:
         - working: true
           agent: "testing"
           comment: "Hero carousel implemented with embla-carousel-react. Carousel contains 4 hero images with auto-scroll every 5 seconds. Next/Previous buttons are visible on desktop and clickable. Carousel navigation works properly with smooth transitions."
+        - working: true
+          agent: "testing"
+          comment: "VERIFIED FIX: Hero carousel left/right navigation buttons are now clickable and properly positioned above text overlay with z-20. Found 4 buttons in hero section, both previous and next buttons respond to clicks correctly. The z-index fix ensures buttons are above the text overlay container."
 
   - task: "Gallery Lightbox"
     implemented: true
