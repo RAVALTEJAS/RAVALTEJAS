@@ -177,6 +177,30 @@ frontend:
           agent: "testing"
           comment: "Mobile menu works perfectly. Mobile menu button is visible on mobile viewport (390x844), opens mobile navigation with 6 menu links, and links are clickable."
 
+  - task: "Hero Carousel"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/landing/Hero.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Hero carousel implemented with embla-carousel-react. Carousel contains 4 hero images with auto-scroll every 5 seconds. Next/Previous buttons are visible on desktop and clickable. Carousel navigation works properly with smooth transitions."
+
+  - task: "Gallery Lightbox"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/landing/Gallery.jsx"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "testing"
+          comment: "Gallery lightbox fully functional using Radix UI Dialog. 6 gallery images are clickable and open in a modal lightbox with large image display (5416x3282 resolution). Dialog opens/closes properly with smooth animations. Lightbox shows full-size images with proper aspect ratios."
+
 metadata:
   created_by: "testing_agent"
   version: "1.0"
