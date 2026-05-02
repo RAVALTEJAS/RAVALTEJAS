@@ -11,7 +11,6 @@
 ⚡ I have hands-on experience with <strong>HTML, CSS, JavaScript, React, Angular, Bootstrap, and Tailwind CSS</strong>.<br>
 🛠️ I also use tools like <strong>Git, GitHub, and Figma (basic)</strong> to streamline my workflow.<br>
 🎯 My goal is to become a <strong>full-stack developer</strong> and contribute to real-world projects and open-source communities.<br>
-🎲 Fun fact: I believe that great design isn’t just how it looks — it’s how it works for the user.
 </p>
 
 <h2 align="left">I code with</h2>
@@ -27,7 +26,7 @@
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" height="40" alt="angular logo" />
   <img width="12" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-plain.svg" height="40" alt="bootstrap logo" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" height="40" alt="bootstrap logo" />
   <img width="12" />
   <img src="https://raw.githubusercontent.com/tailwindlabs/tailwindcss/HEAD/.github/logo-dark.svg" height="40" alt="tailwind logo" />
 </div>
